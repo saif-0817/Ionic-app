@@ -1,0 +1,86 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/places/tabs/offers"></ion-back-button>
+    </ion-buttons>
+    <ion-title>New Offer</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onCreateOffer()" [disabled]="this.form.invalid && !this.form.get('image').value ">
+        <ion-icon name="checkmark" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col sizeSm="6" offsetSm="3">
+          <ion-item>
+            <ion-input label="Title" labelPlacement="floating" type="text" autocomplete autocorrect
+              formControlName="title"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col sizeSm="6" offsetSm="3">
+          <ion-item>
+            <ion-textarea label="Short Description" labelPlacement="floating" rows="3" formControlName="description">
+            </ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="form.get('description').invalid && form.get('description').touched">
+        <ion-col sizeSm="6" offsetSm="3">
+          <p>Descriptiom must not be longer than 180 charecters.</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" sizeSm="6" offsetSm="3">
+          <ion-item>
+            <ion-input label="Price" labelPlacement="floating" type="number" formControlName="price"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" sizeSm="3" offsetSm="3">
+          <ion-item>
+            <ion-label>Available from</ion-label>
+
+            <ion-datetime-button datetime="datetimeFrom"></ion-datetime-button>
+
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime id="datetimeFrom" [showDefaultButtons]="true" presentation="date"
+                  formControlName="dateFrom" [min]="minDate" [max]="maxDate" [value]="minDate"></ion-datetime>
+              </ng-template>
+            </ion-modal>
+          </ion-item>
+        </ion-col>
+        <ion-col sizeSm="3">
+          <ion-item>
+            <ion-label>Available to</ion-label>
+            <ion-datetime-button datetime="datetimeTo"> </ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime id="datetimeTo" presentation="date" formControlName="dateTo" [min]="minDate"
+                  [max]="maxDate" [showDefaultButtons]="true" [value]="minDate"></ion-datetime>
+              </ng-template>
+            </ion-modal>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col sizeMd="3" offsetMd="3">
+          <app-location-picker></app-location-picker>
+        </ion-col>
+
+        <ion-col sizeMd="3" >
+          <app-image-picker  (imagePick)="onImagePicked($event)"></app-image-picker>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

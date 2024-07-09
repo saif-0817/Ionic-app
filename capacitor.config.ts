@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
-  appName: 'eCommarce-app',
+  appName: 'Explore the world',
   webDir: 'www'
 };
 

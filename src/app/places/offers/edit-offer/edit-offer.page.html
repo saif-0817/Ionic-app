@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/places/tabs/offers'"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Offer</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onEditOffer()" [disabled]="form?.invalid">
+        <ion-icon name="checkmark" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+
+  <form [formGroup]="form" *ngIf="!isLoading">
+    <ion-grid>
+      <ion-row>
+        <ion-col sizeSm="6" offsetSm="3">
+          <ion-item>
+            <ion-input label="Title" labelPlacement="floating" type="text" autocomplete autocorrect
+              formControlName="title"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col sizeSm="6" offsetSm="3">
+          <ion-item>
+            <ion-textarea label="Short Description" labelPlacement="floating" rows="3" formControlName="description">
+            </ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="form.get('description').invalid && form.get('description').touched">
+        <ion-col sizeSm="6" offsetSm="3">
+          <p>Descriptiom must not be longer than 180 charecters.</p>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </form>
+</ion-content>
