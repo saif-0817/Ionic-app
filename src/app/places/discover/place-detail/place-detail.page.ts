@@ -21,7 +21,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class PlaceDetailPage implements OnInit, OnDestroy {
   place: Place;
-  isBookable = false;
+  isBookable = true;
   isLoading: boolean = false;
   private placeSub: Subscription;
 
